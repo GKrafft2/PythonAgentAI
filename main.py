@@ -8,6 +8,7 @@ from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.agent import ReActAgent
 from llama_index.llms import OpenAI
 from pdf import canada_engine, lpp_engine, apg_engine, ifd_engine
+from mafs import multiply_tool, add_tool
 
 load_dotenv()
 
@@ -42,9 +43,11 @@ tools = [
             description="il s'agit de la loi fédérale suisse sur l'impôt fédéral direct", 
         ),
     ),
+    multiply_tool,
+    add_tool,
 ]
 
-llm = OpenAI(model="gpt-3.5-turbo-0613")
+llm = OpenAI(model="gpt-3.5-turbo")
 agent = ReActAgent.from_tools(tools, llm=llm, verbose=True, context=context)
 
 while (prompt := input("Enter a prompt (q to quit): ")) != "q":
