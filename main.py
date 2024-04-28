@@ -7,18 +7,10 @@ from note_engine import note_engine
 from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.agent import ReActAgent
 from llama_index.llms import OpenAI
-from pdf import canada_engine, lpp_engine, apg_engine, ifd_engine
+from pdf import lpp_engine, apg_engine, ifd_engine
 from mafs import multiply_tool, add_tool
 
 load_dotenv()
-
-population_path = os.path.join("data", "population.csv")
-population_df = pd.read_csv(population_path)
-
-population_query_engine = PandasQueryEngine(
-    df=population_df, verbose=True, instruction_str=instruction_str
-)
-population_query_engine.update_prompts({"pandas_prompt": new_prompt})
 
 tools = [
     note_engine,
