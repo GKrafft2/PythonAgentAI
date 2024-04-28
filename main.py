@@ -7,7 +7,7 @@ from note_engine import note_engine
 from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.agent import ReActAgent
 from llama_index.llms import OpenAI
-from pdf import canada_engine
+from pdf import canada_engine, lpp_engine, apg_engine, ifd_engine
 
 load_dotenv()
 
@@ -22,17 +22,24 @@ population_query_engine.update_prompts({"pandas_prompt": new_prompt})
 tools = [
     note_engine,
     QueryEngineTool(
-        query_engine=population_query_engine,
+        query_engine=lpp_engine,
         metadata=ToolMetadata(
-            name="population_data",
-            description="this gives information at the world population and demographics",
+            name="lpp_data",
+            description="il s'agit de la loi suisse sur le droit de la prévoyace professionnelle vieillesse, survivants et invalidité", 
         ),
     ),
     QueryEngineTool(
-        query_engine=canada_engine,
+        query_engine=apg_engine,
         metadata=ToolMetadata(
-            name="canada_data",
-            description="this gives detailed information about canada the country",
+            name="apg_data",
+            description="ce document des inforamtions sur les allocations pour perte de gain dans le cadre de l'armée suisse", 
+        ),
+    ),
+    QueryEngineTool(
+        query_engine=ifd_engine,
+        metadata=ToolMetadata(
+            name="ifd_data",
+            description="il s'agit de la loi fédérale suisse sur l'impôt fédéral direct", 
         ),
     ),
 ]
